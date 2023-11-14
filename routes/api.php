@@ -2,10 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PeminController;
+use App\Http\Controllers\MicroserviceController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -19,27 +17,25 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-Route::post('/login', [AuthController::class,'login']);
-
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/logout', [AuthController::class,'logout']);
-    Route::get('/user/index', [UserController::class,'index']);
-    Route::post('/user/change-password', [UserController::class, 'password']);
-    Route::get('/customer/index/{id}', [CustomerController::class, 'index']);
-    Route::post('/customer/add', [CustomerController::class, 'store']);
-    Route::put('/customer/close',[CustomerController::class],'close');
-    Route::delete('/customer/delete', [CustomerController::class],'destroy');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::get('/test', function () {
-    dd('test');
+Route::controller(PeminController::class)->prefix('pemin')->group(function () {
+    Route::get('distributor', 'getDistributors');
+    Route::get('product', 'getProducts');
+    Route::get('sale', 'getSales');
+    Route::get('distributor/{id}', 'findDistributor');
+    Route::get('product/{id}', 'findProduct');
+    Route::get('sale/{id}', 'findSale');
+    Route::post('sale', 'storeSale');
 });
 
-Route::post('/tokens/create', function (Request $request) {
-    $token = $request->user()->createToken($request->token_name);
- 
-    return ['token' => $token->plainTextToken];
+Route::controller(MicroserviceController::class)->prefix('micro')->group(function () {
+    Route::get('user', 'getUsers');
+    Route::get('course', 'getcourses');
+    Route::get('user/{id}', 'getUser');
+    Route::get('course/{id}', 'findcourse');
+    Route::get('course/{idCourse}/syllabus/', 'getSyllabi');
+    Route::get('syllabus/{id}', 'findSyllabus');
 });
