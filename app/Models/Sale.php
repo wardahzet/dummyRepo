@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sale extends Model
 {
-    
     use HasFactory;
+
     protected $fillable = [
         'tanggal_pemesanan',
         'jumlah',
-        'produk_id',
+        'product_id',
         'distributor_id',
     ];
 

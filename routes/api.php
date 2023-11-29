@@ -30,12 +30,3 @@ Route::controller(PeminController::class)->prefix('pemin')->group(function () {
     Route::get('sale/{id}', 'findSale');
     Route::post('sale', 'storeSale');
 });
-
-Route::controller(MicroserviceController::class)->prefix('micro')->group(function () {
-    Route::get('user', 'getUsers');
-    Route::get('course', 'getcourses');
-    Route::get('user/{id}', 'getUser');
-    Route::get('course/{id}', 'findcourse');
-    Route::get('course/{idCourse}/syllabus/', 'getSyllabi');
-    Route::get('syllabus/{id}', 'findSyllabus');
-});

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         Product::factory()->count(5)->create();
         Distributor::factory()->count(10)->create();
-        Sale::factory()->count(1000)->create();
+        Sale::factory()->count(rand(1000,1500))->create();
 
         // \App\Models\User::factory(10)->create();
         // $this->call(
