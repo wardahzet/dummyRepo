@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             ]),
             'stok' => rand(1,1000),
             'harga' => fake()->numberBetween(100, 1000),
+            'keterangan' => fake()->text()
         ];
     }
 }

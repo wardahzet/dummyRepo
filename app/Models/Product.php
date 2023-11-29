@@ -15,6 +15,7 @@ class Product extends Model
         'nama_produk',
         'stok',
         'harga',
+        'keterangan'
     ];
 
     public function sale(): HasMany
