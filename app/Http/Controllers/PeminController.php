@@ -73,7 +73,7 @@ class PeminController extends Controller
             ]);
 
             if ($validator->fails()) {
-                throw new ValidationException($validator->errors());
+                throw new ValidationException($validator);
             }
 
             $data = $validator->validated();
