@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Nette\Utils\Arrays;
 
 class PeminController extends Controller
 {
     public function response($data)
     {
         try {
-            if (count($data) == 0) throw new ModelNotFoundException('Data tidak ditemukan', 404);
+            if ($data || $data == null) throw new ModelNotFoundException('Data tidak ditemukan', 404);
             return response()->json([
                 'status' => 'success',
                 'data' => $data,
@@ -54,12 +55,12 @@ class PeminController extends Controller
 
     public function findproduct($id)
     {
-        return $this->response(Product::where('id',$id)->with(['sale'])->get());
+        return $this->response(Product::where('id',$id)->with(['sale'])->first());
     }
 
     public function findsale($id)
     {
-        return $this->response(Sale::where('id',$id)->with(['product','distributor'])->get());
+        return $this->response(Sale::where('id',$id)->with(['product','distributor'])->first());
     }
 
     public function storesale(Request $request)
