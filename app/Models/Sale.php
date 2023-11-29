@@ -6,9 +6,12 @@ use App\Models\Product;
 use App\Models\Distributor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sale extends Model
 {
+    
+    use HasFactory;
     protected $fillable = [
         'tanggal_pemesanan',
         'jumlah',
